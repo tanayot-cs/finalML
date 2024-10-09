@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Energy Consumption Prediction</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #F0F8FF; /* Alice Blue */
+            color: #4B0082; /* Indigo */
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+        }
+        h1 {
+            color: #000000; /* Hot Pink */
+        }
+        .btn-primary {
+            background-color: #1E90FF; /* Dodger Blue */
+            border-color: #1E90FF;
+        }
+        .btn-primary:hover {
+            background-color: #00BFFF; /* Deep Sky Blue */
+            border-color: #00BFFF;
+        }
+        .list-group-item {
+            background-color: #FFB6C1; /* Light Pink */
+            border: 1px solid #FF69B4; /* Hot Pink */
+            color: #4B0082; /* Indigo */
+        }
+        .text-success {
+            color: #32CD32 !important; /* Lime Green */
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">Energy Consumption Prediction</h1>
+        <form method="post" class="mt-4">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Predict</button>
+        </form>
+
+        {% if result %}
+            <div class="mt-4">
+                <h2 class="text-success">Predicted Global Active Power: {{ result.Global_active_power }} kW</h2>
+                <h3>Input Parameters:</h3>
+                <ul class="list-group">
+                    <li class="list-group-item">Global Reactive Power: {{ result.Global_reactive_power }} kW</li>
+                    <li class="list-group-item">Voltage: {{ result.Voltage }} V</li>
+                    <li class="list-group-item">Global Intensity: {{ result.Global_intensity }} A</li>
+                    <li class="list-group-item">Sub Metering 1: {{ result.Sub_metering_1 }} kW</li>
+                    <li class="list-group-item">Sub Metering 2: {{ result.Sub_metering_2 }} kW</li>
+                    <li class="list-group-item">Sub Metering 3: {{ result.Sub_metering_3 }} kW</li>
+                </ul>
+            </div>
+        {% endif %}
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
